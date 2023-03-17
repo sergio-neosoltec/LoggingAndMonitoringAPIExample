@@ -16,7 +16,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var customer in Model.Customers)
+
+        @{
+            System.Diagnostics.Debug.Assert(Model.Customers != null, "Model.Customers != null");
+        }
+        @foreach (var customer in Model.Customers)
             {
                 <tr>
                     <td>@customer.FirstName</td>

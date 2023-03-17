@@ -12,7 +12,7 @@ namespace LoggingAndMonitoringAPIExample.WebApp.Pages
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
-        public string TraceId { get; set; }
+        public string? TraceId { get; set; }
 
         public Activity? CurrentActiviy { get; set; }
 

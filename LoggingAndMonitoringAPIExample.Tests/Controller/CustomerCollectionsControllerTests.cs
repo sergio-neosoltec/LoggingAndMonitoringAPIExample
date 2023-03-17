@@ -9,9 +9,11 @@ using LoggingAndMonitoringAPIExample.Logic.Parameters;
 using LoggingAndMonitoringAPIExample.Logic.Services;
 using LoggingAndMonitoringAPIExample.Tests.Mocks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Moq;
 
 namespace LoggingAndMonitoringAPIExample.Tests.Controller
@@ -24,7 +26,8 @@ namespace LoggingAndMonitoringAPIExample.Tests.Controller
         public CustomerCollectionsControllerTests()
         {
             var mockDependencyHandler = new Mock<CustomerDependencyHandler>();
-
+            var mokDistributedCache = new Mock<IDistributedCache>();
+            
             mockDependencyHandler = ServiceMocks.SetUpMemoryCache(mockDependencyHandler);
             
             // Create a mock object that implements the ICustomerService interface
@@ -48,7 +51,7 @@ namespace LoggingAndMonitoringAPIExample.Tests.Controller
                 .Setup(x => x.GetLoggerFactory())
                 .Returns(mockLoggerFactory.Object);
 
-            _customerCollectionController = new CustomerCollectionsController(mockDependencyHandler.Object);
+            _customerCollectionController = new CustomerCollectionsController(mockDependencyHandler.Object, mokDistributedCache.Object);
         }
         
 

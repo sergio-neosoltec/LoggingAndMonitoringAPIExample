@@ -8,7 +8,7 @@ namespace LoggingAndMonitoringAPIExample.WebApp.Pages
     {
         private readonly HttpClient _apiClient;
         private readonly ILogger<CustomerListingModel> _logger;
-        public IEnumerable<CustomerDto> Customers { get; set; }
+        public IEnumerable<CustomerDto>? Customers { get; set; }
         public CustomerListingModel(HttpClient apiClient, ILoggerFactory loggerFactory)
         {
             _apiClient = apiClient;
